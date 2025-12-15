@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "indexTwo.js",
   "scripts": {
-    "test": ""
+    "devStart": "nodemon indexTwo.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/Mansurrv/BackEndWebTechnology/issues"
   },
-  "homepage": "https://github.com/Mansurrv/BackEndWebTechnology#readme"
+  "homepage": "https://github.com/Mansurrv/BackEndWebTechnology#readme",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
 }
