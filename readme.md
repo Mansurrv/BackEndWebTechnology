@@ -43,3 +43,20 @@ project-root/
 ├── package.json                 # Dependencies
 └── README.md         # Documentation
 ```
+## Database Integration (Assignment 2 Part 2)
+
+### Database Used
+- **Main Entity**: PostgreSQL
+- **Secondary**: MongoDB (for contact form)
+
+### Table Structure - Drivers
+```sql
+CREATE TABLE drivers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    team VARCHAR(100) NOT NULL,
+    points INTEGER DEFAULT 0,
+    wins INTEGER DEFAULT 0,
+    podiums INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

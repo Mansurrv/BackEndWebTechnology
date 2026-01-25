@@ -1,0 +1,134 @@
+/* Modern Reset & Typography */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f8fafc; /* Very light slate gray */
+  color: #334155;
+  margin: 0;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Step Counter Logic */
+  counter-reset: card-step; 
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #1e293b;
+  margin-bottom: 40px;
+  letter-spacing: -1px;
+}
+
+/* The Vertical Card Stack */
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Step Circles on the Left */
+.card::before {
+  counter-increment: card-step;
+  content: counter(card-step);
+  position: absolute;
+  left: -20px;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  background: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+/* Connector line between steps */
+.card:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 60px;
+  left: -1px;
+  width: 2px;
+  height: calc(100% + 20px);
+  background: #e2e8f0;
+  z-index: -1;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  background-color: #f9fafb;
+}
+
+input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* Action Buttons */
+button {
+  width: 100%;
+  padding: 14px;
+  background: #1e293b; /* Dark "Driver" style blue-black */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 5px;
+}
+
+button:hover {
+  background: #334155;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Special styling for the List Display */
+#products {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#products li {
+  padding: 10px 15px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+}

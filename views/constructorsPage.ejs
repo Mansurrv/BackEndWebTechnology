@@ -33,7 +33,7 @@
                         <th>Podiums</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="constructorsBody">
                     <tr>
                         <td>1</td>
                         <td class="team-cell">
@@ -103,5 +103,37 @@
             </table>
         </div>
     </div>
+
+    <script>
+        async function loadConstructors() {
+            const res = await fetch('/api/constructors');
+            const constructors = await res.json();
+            
+            const tbody = document.getElementById('constructorsBody');
+            tbody.innerHTML = ''; // clear table
+
+            constructors.forEach(c => {
+                const tr = document.createElement('tr');
+
+                tr.innerHTML = `
+                    <td>${c.position}</td>
+                    <td class="team-cell">
+                        <div class="team-info">
+                            <div class="team-color" style="background-color: ${c.color};"></div>
+                            <span>${c.team}</span>
+                        </div>
+                    </td>
+                    <td>${c.drivers}</td>
+                    <td class="points">${c.points}</td>
+                    <td>${c.wins}</td>
+                    <td>${c.podiums}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.onload = loadConstructors;
+    </script>
+
 </body>
 </html>

@@ -27,6 +27,10 @@
                 <li><a href="driversPage">Drivers</a></li>
                 <li><a href="#team">Team</a></li>
                 <li><a href="#features">Features</a></li>
+                <li><a href="contact">Contact</a></li>
+                <li><a href="sqll">Datas</a></li>
+                <li><a href="mongo">MongoDB</a></li>
+                <li><a href="add">Add</a></li>                
                 <li class="theme-toggle">
                     <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">
                         <div class="toggle-slider">
@@ -362,6 +366,76 @@
                     <h3>Historical Data</h3>
                     <p>Archive of all Formula 1 seasons since 1950</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Testing Section -->
+    <section class="section" id="api-test">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-code"></i> API Testing</h2>
+                <p>Test our Drivers CRUD API endpoints</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <h3>Get All Drivers</h3>
+                    <p>Retrieve all drivers from database</p>
+                    <a href="/api/drivers" class="btn-outline" target="_blank">Test GET /api/drivers</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Get Driver by ID</h3>
+                    <p>Retrieve specific driver data</p>
+                    <a href="/api/drivers/1" class="btn-outline" target="_blank">Test GET /api/drivers/1</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <h3>API Documentation</h3>
+                    <p>Full API endpoints and examples</p>
+                    <a href="/api/info" class="btn-outline" target="_blank">View API Info</a>
+                </div>
+            </div>
+            
+            <div class="api-examples" style="margin-top: 40px; background: var(--bg-light); padding: 20px; border-radius: var(--radius);">
+                <h3 style="margin-bottom: 15px;">API Usage Examples:</h3>
+                <pre style="background: var(--card-bg); padding: 15px; border-radius: var(--radius); overflow-x: auto;">
+    <code>// Create new driver (POST)
+    fetch('/api/drivers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: 'Lewis Hamilton',
+            team: 'Mercedes',
+            points: 180,
+            wins: 0,
+            podiums: 5
+        })
+    })
+
+    // Update driver (PUT)
+    fetch('/api/drivers/1', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: 'Max Verstappen',
+            team: 'Red Bull',
+            points: 400,
+            wins: 15,
+            podiums: 20
+        })
+    })</code>
+                </pre>
             </div>
         </div>
     </section>

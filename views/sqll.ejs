@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drivers CRUD</title>
+  <link rel="stylesheet" href="/css/stylesPSQL.css">
+</head>
+<body>
+
+<h1>Drivers</h1>
+
+<div class="card">
+  <h2>Add Driver</h2>
+  <input id="name" placeholder="Name">
+  <input id="team" placeholder="Team">
+  <input id="points" placeholder="Points">
+  <input id="wins" placeholder="Wins">
+  <input id="podiums" placeholder="Podiums">
+  <button onclick="addDriver()">Add</button>
+</div>
+
+<div class="card">
+  <h2>Show Drivers</h2>
+  <button onclick="getDrivers()">Show</button>
+  <ul id="drivers"></ul>
+</div>
+
+<div class="card">
+  <h2>Delete Driver</h2>
+  <input id="deleteId" placeholder="Driver ID">
+  <button onclick="deleteDriver()">Delete</button>
+</div>
+
+<div class="card">
+  <h2>Update Driver</h2>
+  <input id="updateId" placeholder="Driver ID">
+  <input id="updatePoints" placeholder="New Points">
+  <button onclick="updateDriver()">Update</button>
+</div>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

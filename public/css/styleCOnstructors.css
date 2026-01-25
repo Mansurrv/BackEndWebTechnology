@@ -12,13 +12,22 @@ header {
 }
 
 header .page-title {
-    font-family: "Inspiration", cursive;
+    font-family: "Inika", cursive;
     font-weight: 400;
     font-size: 50px;
-    font-style: medi;
+    font-style: bold;
 }
 
 header .page-subtitle {
     font-family: 'Inika', sans-serif;
     font-size: medium;
+}
+
+.padd{
+    padding: 20px;
+    margin: 20px;
+}
+
+.hr{
+    color: white;
 }

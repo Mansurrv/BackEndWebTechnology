@@ -1,0 +1,63 @@
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f1f5f9;
+  /* Changed from center-center to center-top for better scrolling */
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  padding: 40px 20px;
+  margin: 0;
+  color: #1e293b;
+}
+
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 450px;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem; /* Creates the vertical spacing between cards */
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Optional: Subtle visual "connector" line between steps */
+.card:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  width: 2px;
+  height: 2rem;
+  background: #cbd5e1;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  padding: 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+button {
+  background: linear-gradient(135deg, #E10600, #E10600);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+
+button:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+}
