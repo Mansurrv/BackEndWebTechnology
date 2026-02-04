@@ -12,6 +12,29 @@
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1995/1995515.png">
 </head>
 <body>
+    <!-- Success/Error Messages -->
+    <% if (success) { %>
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> <%= success %>
+        </div>
+        <script>
+            setTimeout(() => {
+                document.querySelector('.alert').style.display = 'none';
+            }, 5000);
+        </script>
+    <% } %>
+
+    <% if (error) { %>
+        <div class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i> <%= error %>
+        </div>
+        <script>
+            setTimeout(() => {
+                document.querySelector('.alert').style.display = 'none';
+            }, 5000);
+        </script>
+    <% } %>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -30,7 +53,21 @@
                 <li><a href="contact">Contact</a></li>
                 <li><a href="sqll">Datas</a></li>
                 <li><a href="mongo">MongoDB</a></li>
-                <li><a href="add">Add</a></li>                
+                <% if (user) { %>
+                    <!-- Show these when user is logged in -->
+                    <li><a href="add">Add</a></li>
+                    <li class="user-info">
+                        <a href="/profile" class="user-profile">
+                            <i class="fas fa-user-circle"></i>
+                            <%= user.name %>
+                        </a>
+                    </li>
+                    <li><a href="/logout" class="logout-btn">Logout</a></li>
+                <% } else { %>
+                    <!-- Show these when user is NOT logged in -->
+                    <li><a href="login">Login</a></li>
+                    <li><a href="login?register=true" class="register-btn">Register</a></li>
+                <% } %>
                 <li class="theme-toggle">
                     <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">
                         <div class="toggle-slider">
@@ -50,7 +87,6 @@
             </button>
         </div>
     </nav>
-
     <!-- Hero Section -->
     <header class="hero" id="home">
         <div class="hero-container">

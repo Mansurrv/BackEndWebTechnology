@@ -1,0 +1,171 @@
+/* Auth Page Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--bg-light);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.auth-card {
+    background: var(--card-bg, #fff);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    transition: all 0.3s ease;
+}
+
+/* Add these styles to your authRes.css file */
+.hidden {
+    display: none !important;
+}
+
+.active {
+    display: block !important;
+}
+
+.auth-footer {
+    margin-top: 25px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.auth-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Make sure auth-card has enough padding for alerts */
+.auth-card {
+    padding: 30px;
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #eee;
+}
+
+.auth-toggle button {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.auth-toggle button.active {
+    background: #ff0000; /* F1 Red */
+    color: #fff;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Racing Sans One', cursive;
+    color: #ff0000;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    transition: border 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #ff0000;
+}
+
+.btn-primary {
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #cc0000;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: #121212;
+}
+
+body.dark-mode .auth-card {
+    background: #1e1e1e;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .form-group input {
+    background: #2b2b2b;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+body.dark-mode .auth-toggle button.active {
+    background: #ff4d4d;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .auth-card {
+        padding: 30px 20px;
+    }
+    .auth-toggle button {
+        font-size: 14px;
+    }
+}

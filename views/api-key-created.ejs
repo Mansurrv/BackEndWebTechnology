@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1Tracker - API Key Created</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Racing+Sans+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .key-created-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+        
+        .key-warning {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+            color: white;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .api-key-display {
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .api-key-display h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .api-key-value {
+            font-family: monospace;
+            font-size: 18px;
+            background: var(--bg);
+            padding: 15px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin: 20px 0;
+            word-break: break-all;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .api-key-value:hover {
+            background: var(--bg-light);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
+        }
+        
+        .key-prefix {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1200px-F1.svg.png" 
+                    alt="F1 Logo" 
+                    class="logo-img">
+                <span>F1Tracker</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/profile/api-keys" class="active">API Keys</a></li>
+                <li><a href="/logout" class="logout-btn">Logout</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Success Message -->
+    <div class="alert alert-success">
+        <i class="fas fa-check-circle"></i> <%= success %>
+    </div>
+
+    <main class="key-created-container">
+        <div class="profile-header">
+            <h1><i class="fas fa-key"></i> API Key Created Successfully</h1>
+            <p>Your new API key for <strong><%= keyName %></strong> has been generated</p>
+        </div>
+
+        <!-- Warning -->
+        <div class="key-warning">
+            <h3><i class="fas fa-exclamation-triangle"></i> Important Security Notice</h3>
+            <p>This API key will only be shown once. Please copy and store it in a secure location. 
+               You will not be able to view the full key again.</p>
+        </div>
+
+        <!-- API Key Display -->
+        <div class="api-key-display">
+            <h3>Your New API Key <span class="key-prefix">Prefix: <%= keyPrefix %></span></h3>
+            <div class="api-key-value" id="apiKeyValue">
+                <%= apiKey %>
+            </div>
+            <button class="copy-btn" onclick="copyToClipboard()">
+                <i class="fas fa-copy"></i> Copy API Key to Clipboard
+            </button>
+            <p style="margin-top: 15px; color: var(--text-muted); font-size: 14px;">
+                Click the key above to select, or use the copy button
+            </p>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/profile/api-keys" class="btn-primary">
+                <i class="fas fa-list"></i> Back to API Keys
+            </a>
+            <a href="/api/docs" class="btn-secondary" target="_blank">
+                <i class="fas fa-book"></i> View API Documentation
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // Copy to clipboard function
+        function copyToClipboard() {
+            const keyElement = document.getElementById('apiKeyValue');
+            const text = keyElement.textContent;
+            
+            // Use modern clipboard API
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)';
+                }, 2000);
+            }).catch(err => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)';
+                }, 2000);
+            });
+        }
+        
+        // Auto-select key on click
+        document.getElementById('apiKeyValue').addEventListener('click', function() {
+            const range = document.createRange();
+            range.selectNodeContents(this);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+        });
+        
+        // Auto-hide alert
+        setTimeout(() => {
+            const alert = document.querySelector('.alert');
+            if (alert) {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 300);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

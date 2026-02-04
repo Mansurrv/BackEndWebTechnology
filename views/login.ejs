@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1Tracker - Login / Registration</title>
+    <link rel="stylesheet" href="/css/authRes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Alert messages styling */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .alert-success {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border-left: 4px solid #2E7D32;
+        }
+        
+        .alert-error {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+            color: white;
+            border-left: 4px solid #b71c1c;
+        }
+        
+        .alert i {
+            font-size: 18px;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Update toggle buttons to show active state */
+        .auth-toggle button.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+        
+        /* Add transition for form switching */
+        .auth-form {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Display Success/Error Messages -->
+            <% if (success) { %>
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    <%= success %>
+                </div>
+            <% } %>
+            
+            <% if (error) { %>
+                <div class="alert alert-error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <%= error %>
+                </div>
+            <% } %>
+            
+            <div class="auth-toggle">
+                <button id="loginBtn" class="<%= !showRegister ? 'active' : '' %>">Login</button>
+                <button id="registerBtn" class="<%= showRegister ? 'active' : '' %>">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form <%= showRegister ? 'hidden' : 'active' %>" action="/login" method="POST">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required 
+                           value="<%= locals.email || '' %>">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+
+            <!-- Registration Form -->
+            <form id="registerForm" class="auth-form <%= showRegister ? 'active' : 'hidden' %>" action="/register" method="POST">
+                <h2>Register</h2>
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" name="password" placeholder="Enter a password (min. 6 characters)" required>
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <input type="password" id="regConfirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn-primary">Register</button>
+            </form>
+            
+            <div class="auth-footer">
+                <% if (!showRegister) { %>
+                    <p>Don't have an account? <a href="/login?register=true" id="showRegisterLink">Register here</a></p>
+                <% } else { %>
+                    <p>Already have an account? <a href="/login" id="showLoginLink">Login here</a></p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const showRegister = urlParams.get('register') === 'true';
+        
+        // Auto-switch to register if register=true in URL
+        if (showRegister) {
+            document.getElementById('loginBtn')?.classList.remove('active');
+            document.getElementById('registerBtn')?.classList.add('active');
+            
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            
+            if (loginForm && registerForm) {
+                loginForm.classList.remove('active');
+                loginForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+                registerForm.classList.add('active');
+            }
+        }
+        
+        // Toggle between login and register
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        if (loginBtn && registerBtn && loginForm && registerForm) {
+            loginBtn.addEventListener('click', () => {
+                loginBtn.classList.add('active');
+                registerBtn.classList.remove('active');
+                loginForm.classList.remove('hidden');
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+                registerForm.classList.add('hidden');
+                
+                // Clear any error messages after 5 seconds
+                setTimeout(() => {
+                    const alerts = document.querySelectorAll('.alert');
+                    alerts.forEach(alert => {
+                        alert.style.opacity = '0';
+                        setTimeout(() => alert.remove(), 300);
+                    });
+                }, 5000);
+            });
+
+            registerBtn.addEventListener('click', () => {
+                registerBtn.classList.add('active');
+                loginBtn.classList.remove('active');
+                registerForm.classList.remove('hidden');
+                registerForm.classList.add('active');
+                loginForm.classList.remove('active');
+                loginForm.classList.add('hidden');
+                
+                // Clear any error messages after 5 seconds
+                setTimeout(() => {
+                    const alerts = document.querySelectorAll('.alert');
+                    alerts.forEach(alert => {
+                        alert.style.opacity = '0';
+                        setTimeout(() => alert.remove(), 300);
+                    });
+                }, 5000);
+            });
+        }
+        
+        // Form validation
+        const registerFormEl = document.getElementById('registerForm');
+        if (registerFormEl) {
+            registerFormEl.addEventListener('submit', function(e) {
+                const password = document.getElementById('regPassword').value;
+                const confirmPassword = document.getElementById('regConfirmPassword').value;
+                
+                if (password.length < 6) {
+                    e.preventDefault();
+                    showInlineError('Password must be at least 6 characters long');
+                    return false;
+                }
+                
+                if (password !== confirmPassword) {
+                    e.preventDefault();
+                    showInlineError('Passwords do not match');
+                    return false;
+                }
+                
+                return true;
+            });
+        }
+        
+        function showInlineError(message) {
+            // Remove any existing inline error
+            const existingError = document.querySelector('.inline-error');
+            if (existingError) existingError.remove();
+            
+            // Create new error message
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-error inline-error';
+            errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            
+            // Insert before form
+            const form = document.querySelector('form');
+            form.parentNode.insertBefore(errorDiv, form);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                errorDiv.style.opacity = '0';
+                setTimeout(() => errorDiv.remove(), 300);
+            }, 5000);
+        }
+        
+        // Auto-hide alerts after 5 seconds
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 300);
+            });
+        }, 5000);
+    </script>
+</body>
+</html>
